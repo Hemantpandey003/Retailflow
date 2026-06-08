@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RetailFlow: Excel-Based Store Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <section id="loginView" class="login-screen">
+    <form id="loginForm" class="login-card">
+      <div class="brand"><div class="brand-mark">RF</div><div><h1>RetailFlow</h1><p>Doon Departmental Store</p></div></div>
+      <div class="field"><label for="loginEmail">User ID</label><input id="loginEmail" type="email" value="manager@retailflow.com" required></div>
+      <div class="field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" value="mca123" required></div>
+      <button class="btn primary" type="submit">Login</button>
+      
+    </form>
+  </section>
+
+  <section id="appView" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand compact"><div class="brand-mark">RF</div><div><h1>RetailFlow</h1><p>Store control panel</p></div></div>
+      <button class="nav active" data-page="dashboard">Dashboard</button>
+      <button class="nav" data-page="upload">Upload Excel</button>
+      <button class="nav" data-page="manual">Manual entry</button>
+      <button class="nav" data-page="reports">Reports</button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><h2 id="title">Daily store analytics</h2><p id="subtitle">Upload your Excel file every day to generate analytics instantly.</p></div>
+        <div class="actions">
+          <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" hidden>
+          <button class="btn" id="uploadBtn" type="button">Upload Excel/CSV</button>
+          <button class="btn" id="themeBtn" type="button">Toggle theme</button>
+          <button class="btn" id="logoutBtn" type="button">Logout</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="page active">
+        <div class="panel upload-panel">
+          <h3>Upload daily sales file</h3>
+          <p>Use the Excel template to enter transactions for the day, then upload the file here.</p>
+          <div class="status-row">
+            <button class="btn primary" id="chooseFileBtn" type="button">Choose file</button>
+            <span id="uploadStatus">No file selected</span>
+          </div>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><span>Total sales</span><strong id="kpiSales">₹0</strong></div>
+          <div class="kpi"><span>Net profit</span><strong id="kpiProfit">₹0</strong></div>
+          <div class="kpi"><span>Units sold</span><strong id="kpiUnits">0</strong></div>
+          <div class="kpi"><span>Low stock</span><strong id="kpiLow">0</strong></div>
+        </div>
+        <div class="grid two">
+          <div class="panel"><h3>Department sales</h3><canvas id="deptChart"></canvas></div>
+          <div class="panel"><h3>Payment split</h3><canvas id="payChart"></canvas></div>
+        </div>
+        <div class="grid two">
+          <div class="panel table-panel"><h3>Uploaded records</h3><table><thead><tr><th>Date</th><th>Dept</th><th>Product</th><th>Units</th><th>Sales</th><th>Profit</th><th>Stock</th><th>Mode</th></tr></thead><tbody id="recordBody"></tbody></table></div>
+          <div class="panel table-panel"><h3>Alerts</h3><div id="alertBox" class="alerts"></div></div>
+        </div>
+      </section>
+
+      <section id="upload" class="page"><div class="panel"><h3>Excel upload rules</h3><ul><li>Required columns: date, department, product, units, unit_price, cost_per_unit, payment_mode, stock_left, remarks</li><li>Supported formats: .xlsx, .xls, .csv</li><li>Best practice: save one file per day</li></ul></div></section>
+
+      <section id="manual" class="page">
+        <div class="panel form-panel"><h3>Manual entry</h3>
+          <form id="salesForm" class="form-grid">
+            <input id="saleDate" type="date" required>
+            <input id="dept" placeholder="Department" required>
+            <input id="product" placeholder="Product" required>
+            <input id="units" type="number" placeholder="Units" min="1" value="1" required>
+            <input id="price" type="number" placeholder="Unit price" min="1" value="100" required>
+            <input id="cost" type="number" placeholder="Cost per unit" min="1" value="70" required>
+            <select id="mode"><option>Cash</option><option>UPI</option><option>Card</option></select>
+            <input id="stock" type="number" placeholder="Stock left" min="0" value="50" required>
+            <textarea id="remarks" placeholder="Remarks"></textarea>
+            <button class="btn primary full" type="submit">Save record</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="reports" class="page">
+        <div class="panel"><h3>Department summary</h3><table><thead><tr><th>Department</th><th>Sales</th><th>Profit</th><th>Units</th></tr></thead><tbody id="summaryBody"></tbody></table></div>
+        <div class="panel"><button class="btn primary" id="exportBtn" type="button">Export CSV</button></div>
+      </section>
+    </main>
+  </section>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

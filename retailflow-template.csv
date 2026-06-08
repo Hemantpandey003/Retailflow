@@ -1,0 +1,3 @@
+date,department,product,units,unit_price,cost_per_unit,payment_mode,stock_left,remarks
+2026-06-04,Grocery,Basmati Rice 5kg,12,1300,1020,UPI,24,High demand
+2026-06-04,Dairy,Milk Pack,30,300,210,Cash,52,

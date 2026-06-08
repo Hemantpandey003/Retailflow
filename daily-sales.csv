@@ -1,0 +1,11 @@
+date,department,product,units,unit_price,cost_per_unit,payment_mode,stock_left,remarks
+04-06-2026,Grocery,Basmati Rice 5kg,12,1300,1020,UPI,24,High demand
+04-06-2026,Dairy,Milk Pack,30,300,210,Cash,52,
+04-06-2026,Snacks,Namkeen Pack,24,250,160,Card,18,Low stock alert
+04-06-2026,Personal Care,Soap Combo,16,200,130,UPI,40,
+04-06-2026,Beverages,Soft Drink Combo,20,180,120,Cash,33,
+04-06-2026,Household,Floor Cleaner 2L,10,450,310,Card,19,Reorder soon
+04-06-2026,Bakery,Bread Pack,28,60,40,UPI,45,
+04-06-2026,Grocery,Sugar 1kg,15,55,38,Cash,60,
+04-06-2026,Snacks,Potato Chips,22,35,20,UPI,27,
+04-06-2026,Personal Care,Shampoo Bottle,9,180,125,Card,12,Critical stock
